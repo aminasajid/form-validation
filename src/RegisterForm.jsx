@@ -1,45 +1,38 @@
 import React from 'react';
 import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
 import { Container, Form as BootstrapForm, Button } from 'react-bootstrap';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function RegisterForm() {
-  // Custom validation function
   const validate = (values) => {
     const errors = {};
 
-    // Name validation
     if (!values.name) {
       errors.name = 'Name is required';
     } else if (values.name.length < 3) {
       errors.name = 'Name must be at least 3 letters';
     }
 
-    // Email validation
     if (!values.email) {
       errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = 'Invalid email format';
     }
 
-    // Phone validation
     if (!values.phone) {
       errors.phone = 'Phone number is required';
     } else if (!/^[0-9]{10}$/.test(values.phone)) {
       errors.phone = 'Phone number must be exactly 10 digits';
     }
 
-    // DOB validation
     if (!values.dob) {
       errors.dob = 'Date of Birth is required';
     }
 
-    // Gender validation
     if (!values.gender) {
       errors.gender = 'Please select a gender';
     }
 
-    // Password validation (with at least one uppercase letter, one lowercase letter, one number, and one special character)
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!values.password) {
       errors.password = 'Password is required';
@@ -47,31 +40,26 @@ function RegisterForm() {
       errors.password = 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character';
     }
 
-    // Confirm Password validation
     if (!values.confirmPassword) {
       errors.confirmPassword = 'Please confirm your password';
     } else if (values.confirmPassword !== values.password) {
       errors.confirmPassword = 'Passwords do not match';
     }
 
-    // Address validation
     if (!values.address) {
       errors.address = 'Address is required';
     }
 
-    // Country validation
     if (!values.country) {
       errors.country = 'Please select your country';
     }
 
-    // Profile Picture validation (only image files)
     if (!values.profilePicture) {
       errors.profilePicture = 'Profile picture is required';
     } else if (!/\.(jpg|jpeg|png|gif)$/i.test(values.profilePicture.name)) {
       errors.profilePicture = 'Only image files (jpg, jpeg, png, gif) are allowed';
     }
 
-    // Terms and Conditions validation
     if (!values.acceptTerms) {
       errors.acceptTerms = 'You must accept the terms and conditions';
     }
@@ -80,10 +68,7 @@ function RegisterForm() {
   };
 
   return (
-    <Container className="w-50 mx-auto bg-white p-4 shadow-lg m-3" style={{ borderRadius: '8px', border: '1px solid #ddd' }}>
-
-
-
+    <Container className="w-100 w-md-75 w-lg-50 mx-auto bg-white p-4 shadow-lg m-3" style={{ maxWidth: '600px', borderRadius: '8px', border: '1px solid #ddd' }}>
       <h2 className="text-center mb-4">Registration Form</h2>
       <Formik
         initialValues={{
@@ -229,7 +214,7 @@ function RegisterForm() {
               <ErrorMessage name="acceptTerms" component="div" className="text-danger" />
             </BootstrapForm.Group>
 
-            <Button variant="primary" type="submit" className="mt-3">
+            <Button variant="primary" type="submit" className="mt-3 w-100">
               Register
             </Button>
           </FormikForm>
